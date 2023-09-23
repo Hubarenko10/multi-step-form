@@ -1,6 +1,41 @@
-import { CurrentNum, Form, Info, Item, ItemBox, Label, List, Num, PhoneInput, Step, Text, Title, YourInfoBox} from "./YourInfoStyled"
+import { useEffect, useState } from "react";
+import { CurrentNum, Form, Info, Input, Item, ItemBox, Label, LabelText, List, NextBtn, Num, PhoneInput, Step, Text, Title, YourInfoBox} from "./YourInfoStyled"
 
 export const YourInfo = ({onNext}) => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        phoneNumber: ''
+      });
+    
+      useEffect(() => {
+        // При загрузке страницы, попытаемся восстановить данные из localStorage
+        const savedFormData = JSON.parse(localStorage.getItem('formData'));
+        if (savedFormData) setFormData(savedFormData);
+      }, []);
+    
+      const handleInputChange = (e) => {
+        const { name, value } = e.target;
+
+        setFormData({
+          ...formData,
+          [name]: value
+        });
+      };
+    
+      const handleNextClick = () => {
+
+        if (!formData.email.includes('@')) {
+            alert('Please enter a valid email address.');
+            return;
+          }
+          if (!formData.name.trim() || !formData.email.trim() || !formData.phoneNumber.trim()) {
+            alert('Please fill in all required fields.');
+            return;
+          }
+        localStorage.setItem('formData', JSON.stringify(formData));
+        onNext();
+      };
     return(
         <>
         <YourInfoBox>
@@ -43,19 +78,48 @@ export const YourInfo = ({onNext}) => {
                 <Text>Please provide your name, email address, and phone number.</Text>
                 <Form>
                     <Label>
-                    Name
-                    <input type="text" placeholder="e.g. Stephen King"/>
+                    <LabelText>
+                        Name    
+                    </LabelText>
+                    <Input 
+                    type="text"
+                    name="name"
+                    placeholder="e.g. Stephen King"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                         
+                    />
+                    
                     </Label>
                     <Label>
+                    <LabelText>
                     Email Address
-                    <input type="email" placeholder="e.g. stephenking@lorem.com"/>
+                    </LabelText>
+                    <Input 
+                    type="email" 
+                    name="email"
+                    placeholder="e.g. stephenking@lorem.com"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                     
+                    />
                     </Label>
                     <Label>
-                    Phone Number
-                    <PhoneInput type="number" inputMode="numeric" pattern="[0-9]*" />
+
+                    <LabelText>Phone Number</LabelText>
+                   
+                    <PhoneInput
+                     name="phoneNumber"
+                     placeholder="e.g. +1 234 567 890" 
+                     type="number"
+                     pattern="[0-9]*" 
+                     value={formData.phoneNumber}  
+                     onChange={handleInputChange} 
+                      
+                     />
                     </Label>
                 </Form>
-                <button onClick={onNext}>Next Step</button>
+                <NextBtn onClick={handleNextClick}>Next Step</NextBtn>
             </div>
         </YourInfoBox>
         </>

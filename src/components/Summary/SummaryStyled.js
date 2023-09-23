@@ -1,8 +1,9 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import background from '../../images/background.svg';
+import { BiDollar } from 'react-icons/bi'
 
-// ul interface
-export const YourInfoBox = styled.div`
+
+export const Summary = styled.div`
   display: flex;
   justify-content: center;
   align-text: center;
@@ -70,80 +71,75 @@ color: #fff;
 font-size:14px;
 font-weight:bold;
 ` 
-// Personal Info
-
-export const Title = styled.h1`
-color:#022959;
-font-weight:bold;
-padding-top: 56px; 
+export const SummaryTitle = styled.h1`
+color: #022959;
+padding-top:40px;
 margin-bottom:10px;
 `
-export const Text = styled.p`
-color:#9699AA;
-font-size:16px;
+export const SummaryText = styled.p`
+color: #9699AA;
 margin-bottom:35px;
-
 `
-
-export const Form = styled.form`
-display: block;
-input{
-    display:block;
-}
-`
-export const Label = styled.label`
-
-` 
-export const LabelText = styled.p`
-color: #022959;
-font-size:14px;
-margin-bottom: 10px; 
-`
-export const Input = styled.input`
-width: 450px;
-border-radius:10px;
-border: 1px solid #D6D9E6;
-padding-top:12px;
-padding-bottom:12px;
-padding-left:16px;  
-margin-bottom:25px;
-`
-
-
-export const PhoneInput = styled.input`
-width: 450px;
-border-radius:10px;
-border: 1px solid #D6D9E6;
-padding-top:12px;
-padding-bottom:12px;
-padding-left:16px;  
-margin-bottom:90px;
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  &[type='number'] {
-    -moz-appearance: textfield;
-  }
-`;
-
-export const NextBtn = styled.button`
+export const FinishBox = styled.div`
 display: flex;
-margin-left: 326px;
-width: 123px;
-height:48px;
-justify-content:center;
+justify-content:space-between;
 align-items:center;
-border-radius:10px;
-color: #fff;
-background-color:#022959;
-cursor:pointer;
-border:none;
-transition: background-color 0.5s ease, color 0.5s ease;
-&:hover{
-  color:#000;
-  background-color: rgba(2,41,89, 0.5)
+`
 
+export const TextType = styled.p`
+color: #022959;
+font-size:16px;
+font-weight:bold;
+display: flex;
+gap: 5px;
+margin-bottom:10px;
+`
+
+export const ChangeBtn = styled.button`
+border:none;
+font-size:14px;
+text-decoration: underline;
+color:#9699AA;
+background-color:transparent;
+padding: 0;
+cursor:pointer;
+`
+
+export const PriceText = styled.p`
+display: flex;
+align-items:center;
+color:#022959;
+font-weight:bold;
+`
+
+export const Icon = styled(BiDollar)`
+
+`
+export const DisplayBox = styled.div`
+margin-top:40px;
+
+&:not(:last-child){
+    margin-bottom:48px;
 }
+`
+export const DisplayDataBox = styled.div`
+display:flex;
+align-items:center;
+justify-content:space-between;
+color:#022959;
+
+margin-bottom:16px;
+&:last-child{
+    margin-bottom:48px;
+}
+`
+export const DataTitle = styled.p`
+color: #9699AA;
+font-size:14px;
+
+`
+export const DataText = styled.p`
+display:flex;
+align-items:center;
+font-weight:bold;
 `

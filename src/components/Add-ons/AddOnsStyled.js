@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import background from '../../images/background.svg';
+import { BiDollar } from 'react-icons/bi'
 
-// ul interface
-export const YourInfoBox = styled.div`
+export const AddOnsBox = styled.div`
   display: flex;
   justify-content: center;
   align-text: center;
@@ -70,80 +70,74 @@ color: #fff;
 font-size:14px;
 font-weight:bold;
 ` 
-// Personal Info
-
-export const Title = styled.h1`
-color:#022959;
-font-weight:bold;
-padding-top: 56px; 
+export const AddOnsTitle = styled.h1`
+color: #022959;
+padding-top:40px;
 margin-bottom:10px;
 `
-export const Text = styled.p`
-color:#9699AA;
-font-size:16px;
+export const AddOnsText = styled.p`
+color: #9699AA;
 margin-bottom:35px;
-
 `
 
-export const Form = styled.form`
-display: block;
-input{
-    display:block;
-}
-`
 export const Label = styled.label`
-
-` 
-export const LabelText = styled.p`
-color: #022959;
-font-size:14px;
-margin-bottom: 10px; 
-`
-export const Input = styled.input`
-width: 450px;
-border-radius:10px;
-border: 1px solid #D6D9E6;
-padding-top:12px;
-padding-bottom:12px;
-padding-left:16px;  
-margin-bottom:25px;
-`
-
-
-export const PhoneInput = styled.input`
-width: 450px;
-border-radius:10px;
-border: 1px solid #D6D9E6;
-padding-top:12px;
-padding-bottom:12px;
-padding-left:16px;  
-margin-bottom:90px;
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  &[type='number'] {
-    -moz-appearance: textfield;
-  }
-`;
-
-export const NextBtn = styled.button`
+border:${(props) => (props.isChecked ? '1px solid #483EFF' : '1px solid #D6D9E6')};
+height:81px;
+padding-left:24px;
+padding-right:24px;
 display: flex;
-margin-left: 326px;
-width: 123px;
-height:48px;
-justify-content:center;
 align-items:center;
-border-radius:10px;
-color: #fff;
-background-color:#022959;
+border-radius:8px;
+justify-content:space-between;
 cursor:pointer;
-border:none;
-transition: background-color 0.5s ease, color 0.5s ease;
-&:hover{
-  color:#000;
-  background-color: rgba(2,41,89, 0.5)
+margin-bottom: 20px;
 
-}
+&:last-child {
+    margin-bottom: 81px;
+  }
+`
+export const Input = styled.input.attrs({ type: 'checkbox' })`
+
+width: 20px;
+height:20px;
+margin-right:24px;
+&:checked::before {
+    content: '\u2714';
+    display: flex;
+    justify-content:center;
+    width: 20px;
+    height: 20px;
+    color: #fff;
+    background-color: #483EFF;
+  }
+`
+
+export const ServicesBox = styled.div`
+margin-right: 128px;
+display: flex;
+align-items:center;
+`
+
+export const ServicesTitle = styled.p`
+font-size:16px;
+font-weight:bold;
+color: #022959;
+margin-bottom:7px;
+`
+
+export const ServicesText = styled.p`
+font-size:14px;
+color:#9699AA;
+`
+
+export const CurrencyText = styled.p`
+display:flex;
+align-items:center;
+color:#483EFF;
+letter-spacing:-1px;
+
+`
+
+export const Currency = styled(BiDollar)`
+
 `
