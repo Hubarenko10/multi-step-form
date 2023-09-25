@@ -1,14 +1,15 @@
 {
   "files": {
-    "main.css": "/react-homework-template/static/css/main.7acaea2f.css",
-    "main.js": "/react-homework-template/static/js/main.91799d1b.js",
-    "static/media/background.svg": "/react-homework-template/static/media/background.f1d9346e9d0d7d90834340e98b5053f0.svg",
-    "index.html": "/react-homework-template/index.html",
-    "main.7acaea2f.css.map": "/react-homework-template/static/css/main.7acaea2f.css.map",
-    "main.91799d1b.js.map": "/react-homework-template/static/js/main.91799d1b.js.map"
+    "main.css": "/multi-step-form/static/css/main.7acaea2f.css",
+    "main.js": "/multi-step-form/static/js/main.26f4fbf0.js",
+    "static/media/FinishIcon.svg": "/multi-step-form/static/media/FinishIcon.286ef9e9d3ebcd1b8a5f8b04b534a676.svg",
+    "static/media/background.svg": "/multi-step-form/static/media/background.f1d9346e9d0d7d90834340e98b5053f0.svg",
+    "index.html": "/multi-step-form/index.html",
+    "main.7acaea2f.css.map": "/multi-step-form/static/css/main.7acaea2f.css.map",
+    "main.26f4fbf0.js.map": "/multi-step-form/static/js/main.26f4fbf0.js.map"
   },
   "entrypoints": [
     "static/css/main.7acaea2f.css",
-    "static/js/main.91799d1b.js"
+    "static/js/main.26f4fbf0.js"
   ]
 }
