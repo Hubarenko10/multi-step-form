@@ -1,14 +1,19 @@
-import { ChangeBtn, CurrentNum, DataText, DataTitle, DisplayBox, DisplayDataBox, FinishBox, Icon, Info, Item, ItemBox, List, Num, PriceText, Step, Summary, SummaryText, SummaryTitle, TextType } from "./SummaryStyled"
+import { BtnBox, PrevBtn } from "components/SelectPlan/PlanStyled";
+import { ChangeBtn, CurrentNum, DataText, DataTitle, DisplayBox, DisplayDataBox, FinishBox, Icon, Info, Item, ItemBox, List, Num, PriceText, Step, Summary, SummaryText, SummaryTitle, TextType, TotalIcon, TotalItem, TotalText } from "./SummaryStyled"
+import { NextBtn } from "components/YourInfo/YourInfoStyled";
 
 
 
 export const SummaryComponent = ({onChange,onNext,onPrevious}) => {
     const subs = localStorage.getItem("subscription")
-    const subscription = subs[0].toUpperCase() + subs.slice(1).toLowerCase()
-    const type = localStorage.getItem("subscriptionType")
-    const subscriptionType = type[0].toUpperCase() + type.slice(1).toLowerCase()
+    
+    const subscription = subs.toLowerCase()
+    console.log(subs)
+    const type = JSON.parse(localStorage.getItem('isYearly'));
     const prices = JSON.parse(localStorage.getItem("prices"))
-    const price = prices[subs]
+   
+    const price = prices[subscription]
+   
     const check = JSON.parse(localStorage.getItem("checkboxesState"))
     const displayData = check.reduce((acc, checkbox) => {
         const { title, number, checked } = checkbox;
@@ -20,8 +25,26 @@ export const SummaryComponent = ({onChange,onNext,onPrevious}) => {
         }
         return acc;
       }, {});
-    console.log(check)
-    // console.log(foundNumbers)
+      const calculateTotalPrice = () => {
+        let totalPrice = 0;
+    
+        // Пройдемся по выбранным элементам и прибавим к общей сумме соответствующие цены
+        Object.keys(displayData).forEach((number) => {
+          const titlesCount = displayData[number].titles.length;
+          const itemPrice = type ? number * 10 : number;
+          totalPrice += titlesCount * itemPrice;
+        });
+    
+        return totalPrice;
+      };
+      const totalPrice = Number(price.match(/\d+(\.\d+)?/g));
+      
+      const totalAmount = calculateTotalPrice()+totalPrice;
+
+      const ConfirmClick = () => {
+        localStorage.clear();
+        onNext()
+      }
     return (
     <>
     <Summary>
@@ -60,8 +83,8 @@ export const SummaryComponent = ({onChange,onNext,onPrevious}) => {
         <SummaryText>Double-check everything looks OK before confirming.</SummaryText>
         <FinishBox>
         <div>
-        <TextType>{subscription}<span>({subscriptionType})</span></TextType>
-        <ChangeBtn onClick={onChange}>Change</ChangeBtn>
+        <TextType>{subs}{type === false ? <span>(Monthly)</span>:<span>(Yearly)</span>}</TextType>  
+<ChangeBtn onClick={onChange}>Change</ChangeBtn>
         </div>
         <PriceText><Icon/>{price}</PriceText>
         </FinishBox>
@@ -70,12 +93,22 @@ export const SummaryComponent = ({onChange,onNext,onPrevious}) => {
       displayData[number].titles.map((title, index) => (
         <DisplayDataBox key={`${number}-${index}`}>
           <DataTitle>{title}</DataTitle> 
-          <DataText>+<Icon/>{number}/mo</DataText>  
+          {type === false ? 
+          <DataText>+<Icon/>{number}/mo</DataText> 
+          : 
+          <DataText>+<Icon/>{number*10}/yr</DataText>} 
         </DisplayDataBox>
       ))
     ))}
   </DisplayBox>
-      <button onClick={onPrevious}>Go back</button>
+    {type === false ? 
+    <TotalText>Total (per month)<TotalItem><TotalIcon/>{totalAmount}/mo</TotalItem></TotalText> 
+    : 
+    <TotalText>Total (per year)<TotalItem>{totalAmount}/yr</TotalItem></TotalText>}
+    <BtnBox>
+        <PrevBtn onClick={onPrevious}>Go Back</PrevBtn>
+        <NextBtn onClick={ConfirmClick}>Confirm</NextBtn>
+      </BtnBox>
       </div>
       </Summary> 
     </>

@@ -143,3 +143,24 @@ display:flex;
 align-items:center;
 font-weight:bold;
 `
+
+export const TotalText = styled.p`
+display: flex;
+justify-content:space-between;
+align-items:center;
+font-size:16px;
+color: #9699AA;
+margin-bottom:128px;
+`
+
+export const TotalItem = styled.span`
+color: #483EFF;
+font-size:20px;
+font-weight:bold;
+display: flex;
+align-items:center;
+
+`
+export const TotalIcon = styled(BiDollar)`
+padding-top:3px;
+`

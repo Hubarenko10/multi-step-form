@@ -22,9 +22,10 @@ import { NextBtn } from 'components/YourInfo/YourInfoStyled';
 import { useEffect, useState } from 'react';
 
 export const AddOns = ({ onNext, onPrevious }) => {
+    const subs = JSON.parse(localStorage.getItem("isYearly"))
     const [checkboxes, setCheckboxes] = useState([
-        { title: 'Online service', text: 'Access to multiplayer games', checked: false,number: 1 },
-        { title: 'Larger storage', text: 'Extra 1TB of cloud save', checked: false,number: 2 },
+        { title: 'Online service', text: 'Access to multiplayer games', checked: false,number: 1},
+        { title: 'Larger storage', text: 'Extra 1TB of cloud save', checked: false,number: 2},
         { title: 'Customizable profile', text: 'Custom theme on your profile', checked: false,number: 2 },
       ]);
       useEffect(() => {
@@ -85,7 +86,8 @@ export const AddOns = ({ onNext, onPrevious }) => {
               <ServicesText>{checkbox.text}</ServicesText>
             </div>
           </ServicesBox>
-          <CurrencyText>+<Currency/>{checkbox.number}/mo</CurrencyText>
+          {subs === false ? <CurrencyText>+<Currency/>{checkbox.number}/mo</CurrencyText> : 
+          <CurrencyText>+<Currency/>{checkbox.number*10}/yr</CurrencyText>}
         </Label>
       ))}
           </div>

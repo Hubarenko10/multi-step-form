@@ -39,7 +39,7 @@ export const Plan = ({ onNext, onPrevious }) => {
     pro: '15/mo',
   };
   const [selectedSubscription, setSelectedSubscription] = useState(
-    localStorage.getItem('subscription') || 'standard'
+    localStorage.getItem('subscription') || 'arcade'
   );
   const [isYearly, setIsYearly] = useState(
     JSON.parse(localStorage.getItem('isYearly')) || false
@@ -126,8 +126,8 @@ export const Plan = ({ onNext, onPrevious }) => {
         <PlanText>You have the option of monthly or yearly billing.</PlanText>
         <SubsBox>
           <SubsLabel
-            isSelected={selectedSubscription === 'arcade'}
-            onClick={() => handleLabelClick('arcade')}
+            isSelected={selectedSubscription === 'Arcade'}
+            onClick={() => handleLabelClick('Arcade')}
           >
             <SubsIconBoxArcade>
               <SubsIconArcade />
