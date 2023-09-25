@@ -9,7 +9,6 @@ export const YourInfo = ({onNext}) => {
       });
     
       useEffect(() => {
-        // При загрузке страницы, попытаемся восстановить данные из localStorage
         const savedFormData = JSON.parse(localStorage.getItem('formData'));
         if (savedFormData) setFormData(savedFormData);
       }, []);
@@ -25,12 +24,13 @@ export const YourInfo = ({onNext}) => {
     
       const handleNextClick = () => {
 
-        if (!formData.email.includes('@')) {
-            alert('Please enter a valid email address.');
-            return;
-          }
+      
           if (!formData.name.trim() || !formData.email.trim() || !formData.phoneNumber.trim()) {
             alert('Please fill in all required fields.');
+            return;
+          }
+          if (!formData.email.includes('@')) {
+            alert('Please enter a valid email address.');
             return;
           }
         localStorage.setItem('formData', JSON.stringify(formData));

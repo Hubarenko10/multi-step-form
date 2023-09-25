@@ -5,17 +5,20 @@ import { NextBtn } from "components/YourInfo/YourInfoStyled";
 
 
 export const SummaryComponent = ({onChange,onNext,onPrevious}) => {
-    const subs = localStorage.getItem("subscription")
-    
-    const subscription = subs.toLowerCase()
-    console.log(subs)
-    const type = JSON.parse(localStorage.getItem('isYearly'));
-    const prices = JSON.parse(localStorage.getItem("prices"))
-   
-    const price = prices[subscription]
-   
-    const check = JSON.parse(localStorage.getItem("checkboxesState"))
-    const displayData = check.reduce((acc, checkbox) => {
+  const subs = localStorage.getItem("subscription");
+  const subscription = subs ? subs.toLowerCase() : "";  // Handle subs being null or undefined
+  console.log(subs);
+
+  const type = JSON.parse(localStorage.getItem("isYearly"));
+  const prices = JSON.parse(localStorage.getItem("prices"));
+  console.log(prices);
+
+  const price = prices ? prices[subscription] : 0;  // Handle prices being null or undefined
+  console.log(price);
+
+  const check = JSON.parse(localStorage.getItem("checkboxesState"));
+  const displayData = check
+    ? check.reduce((acc, checkbox) => {
         const { title, number, checked } = checkbox;
         if (checked) {
           if (!acc[number]) {
@@ -24,11 +27,11 @@ export const SummaryComponent = ({onChange,onNext,onPrevious}) => {
           acc[number].titles.push(title);
         }
         return acc;
-      }, {});
+      }, {})
+    : {};
       const calculateTotalPrice = () => {
         let totalPrice = 0;
     
-        // Пройдемся по выбранным элементам и прибавим к общей сумме соответствующие цены
         Object.keys(displayData).forEach((number) => {
           const titlesCount = displayData[number].titles.length;
           const itemPrice = type ? number * 10 : number;
@@ -41,9 +44,10 @@ export const SummaryComponent = ({onChange,onNext,onPrevious}) => {
       
       const totalAmount = calculateTotalPrice()+totalPrice;
 
-      const ConfirmClick = () => {
-        localStorage.clear();
+      const ConfirmClick = () => {  
         onNext()
+        localStorage.clear();
+        
       }
     return (
     <>

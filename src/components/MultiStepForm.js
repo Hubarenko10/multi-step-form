@@ -3,6 +3,7 @@ import { YourInfo } from "./YourInfo/YourInfo"
 import { Plan } from "./SelectPlan/Plan";
 import { AddOns } from "./Add-ons/AddOns";
 import { SummaryComponent } from "./Summary/Summary";
+import { FinishPage } from "./FinishPage/FinishPage";
 
 
 export const MultiStepForm = () => {
@@ -28,6 +29,8 @@ export const MultiStepForm = () => {
             return <AddOns onNext = {handleNext} onPrevious = {handlePrevious}/>
             case 4:
             return <SummaryComponent onChange={Change} onNext = {handleNext} onPrevious = {handlePrevious}/>
+            case 5:
+            return <FinishPage/>
             default: return null;
         }
     

@@ -33,18 +33,23 @@ import {
 } from './PlanStyled';
 
 export const Plan = ({ onNext, onPrevious }) => {
-  const price = {
-    arcade: '9/mo',
-    advanced: '12/mo',
-    pro: '15/mo',
-  };
   const [selectedSubscription, setSelectedSubscription] = useState(
-    localStorage.getItem('subscription') || 'arcade'
+    localStorage.getItem('subscription') || 'Arcade'
   );
   const [isYearly, setIsYearly] = useState(
     JSON.parse(localStorage.getItem('isYearly')) || false
   );
-  const [changePrice, setChangePrice] = useState(price);
+  const [changePrice, setChangePrice] = useState(() => {
+    const storedPrices = localStorage.getItem('prices');
+    if (storedPrices) {
+      return JSON.parse(storedPrices);
+    }
+    return {
+      arcade: '9/mo',
+      advanced: '12/mo',
+      pro: '15/mo'
+    };
+  });
 
   const handlePriceChange = () => {
     
@@ -88,6 +93,13 @@ export const Plan = ({ onNext, onPrevious }) => {
     }
     localStorage.setItem('isYearly', JSON.stringify(isYearly));
   }, [isYearly]);
+  useEffect(() => {
+    localStorage.setItem('subscription', selectedSubscription);
+  }, [selectedSubscription]);
+  
+  useEffect(() => {
+    localStorage.setItem('prices', JSON.stringify(changePrice));
+  }, [changePrice]);
 
   return (
     <PlanBox>
